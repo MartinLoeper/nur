@@ -82,7 +82,7 @@ buildDotnetModule rec {
   '';
 
   meta = with lib; {
-    homepage = "https://github.com/GitCredentialManager/git-credential-manager";
+    homepage = "https://github.com/git-ecosystem/git-credential-manager;
     description = "Secure, cross-platform Git credential storage with authentication to GitHub, Azure Repos, and other popular Git hosting services";
     longDescription = ''
       Git Credential Manager (GCM) is a secure Git credential helper built on .NET that runs on Windows, macOS, and Linux.
@@ -91,14 +91,14 @@ buildDotnetModule rec {
     '';
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
-    mainProgram = "git-credential-manager-core";
+    mainProgram = "git-credential-manager";
   };
 
   passthru.tests = {
     diagnose = mkShell {
       packages = [ git-credential-manager git ];
       shellHook = ''
-        ${git-credential-manager}/bin/git-credential-manager-core diagnose
+        ${git-credential-manager}/bin/git-credential-manager diagnose
         if [ $? -eq 0 ]; then
           exit 1;
         fi
@@ -110,7 +110,7 @@ buildDotnetModule rec {
       packages = [ git-credential-manager git ];
       shellHook = ''
         mkdir -p $out
-        ${git-credential-manager}/bin/git-credential-manager-core --version > $out/version
+        ${git-credential-manager}/bin/git-credential-manager --version > $out/version
         grep -Fxq "${version}" $out/version
       '';
     };
