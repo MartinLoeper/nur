@@ -22,18 +22,18 @@ buildDotnetModule rec {
   src = fetchFromGitHub {
     owner = "git-ecosystem";
     repo = "git-credential-manager";
-    rev = "v2.2.1";
-    hash = "sha256-zRjDdykb0WD+2HoyvTJawBMKlCfm3Aoig76IDiBdVA0=";
+    rev = "f9dde2eb7662a1fdfe82897ba9ed309868d00402";
+    hash = "sha256-PeQ9atSCgSvduAcqY2CnNJH3ucvoInduA5i8dPUJiHo=";
   };
 
   projectFile = [
-    # Main program
-    "./src/shared/Git-Credential-Manager"
-    # Helpers for various services
-    "./src/shared/Atlassian.Bitbucket.UI.Avalonia"
-    "./src/shared/GitHub.UI.Avalonia"
-    "./src/shared/GitLab.UI.Avalonia"
+    "./src/linux/Packaging.Linux/Packaging.Linux.csproj"
   ];
+
+  preConfigure = ''
+    echo "Patching shebang for $src/src/linux/Packaging.Linux/*.sh"
+    patchShebangs "./src/linux/Packaging.Linux/"*.sh
+  '';
 
   executables = [ "git-credential-manager" ];
 
@@ -57,7 +57,7 @@ buildDotnetModule rec {
   buildInputs = [ git ];
 
   dotnet-sdk = dotnetCorePackages.sdk_6_0;
-  # dotnetFlags = [ "--runtime linux-x64" ];
+  dotnetBuildFlags = [ "--configuration=LinuxRelease" ];
   dotnetInstallFlags = [ "--framework net6.0" ];
 
   # For some reason, Avalonia **really** wants to probe a bunch of names for
