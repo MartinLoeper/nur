@@ -6,7 +6,13 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> 
+  {
+    overlays = [ 
+      (import ./overlays/dotnet.nix { nixpkgs = <nixpkgs>; })
+    ];
+  } 
+}:
 
 rec {
 

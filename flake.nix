@@ -18,7 +18,7 @@
         pkgs = import nixpkgs { 
           inherit system;
           overlays = [ 
-            (import ./overlays/dotnet.nix)
+            (import ./overlays/dotnet.nix { inherit nixpkgs; })
           ];
         };
       });

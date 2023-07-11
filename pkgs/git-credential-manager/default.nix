@@ -1,10 +1,8 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, dpkg
-, dotnet-sdk
 , buildDotnetModule
-, dotnetCorePackages
+, dotnet-sdk_6-0-201
 , xorg
 , libICE
 , libSM
@@ -27,7 +25,7 @@ buildDotnetModule rec {
   };
 
   projectFile = [
-    "./src/linux/Packaging.Linux/Packaging.Linux.csproj"
+    "./src/linux/Packaging.Linux"
   ];
 
   preConfigure = ''
@@ -56,8 +54,11 @@ buildDotnetModule rec {
 
   buildInputs = [ git ];
 
-  dotnet-sdk = dotnetCorePackages.sdk_6_0;
-  dotnetBuildFlags = [ "--configuration=LinuxRelease" ];
+  dotnet-sdk = dotnet-sdk_6-0-201;
+  useAppHost = true;
+  selfContainedBuild = true;
+  buildType = "LinuxRelease";
+  #dotnetBuildFlags = [ "--configuration=LinuxRelease" ];
   dotnetInstallFlags = [ "--framework net6.0" ];
 
   # For some reason, Avalonia **really** wants to probe a bunch of names for
