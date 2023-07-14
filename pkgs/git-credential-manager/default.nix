@@ -119,7 +119,7 @@ buildDotnetModule rec {
         touch $out
       '';
     };
-b7f37286648498ef53c3838fb36178df6ef18460
+
     version = mkShell {
       packages = [ git-credential-manager git ];
       shellHook = ''
