@@ -64,12 +64,6 @@ buildDotnetModule rec {
 
   projectFile = [
     "./src/linux/Packaging.Linux/Packaging.Linux.csproj"
-#    "./src/shared/Git-Credential-Manager/Git-Credential-Manager.csproj"
-#    "./src/shared/Atlassian.Bitbucket/Atlassian.Bitbucket.csproj"
-#    "./src/shared/Microsoft.AzureRepos/Microsoft.AzureRepos.csproj"
-#    "./src/shared/GitLab/GitLab.csproj"
-#    "./src/shared/Core/Core.csproj"
-#    "./src/shared/GitHub/GitHub.csproj"
   ];
 
   preConfigure = ''
