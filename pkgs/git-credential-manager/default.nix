@@ -104,7 +104,7 @@ buildDotnetModule rec {
     '';
     license = licenses.mit;
     changelog = "https://github.com/git-ecosystem/git-credential-manager/releases/tag/v${version}";
-    platforms = with platforms; linux ++ darwin ++ windows;
+    platforms = [ "x86_64-linux" ];
     mainProgram = "git-credential-manager";
   };
 
