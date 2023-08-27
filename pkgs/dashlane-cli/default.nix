@@ -2,9 +2,9 @@
 
 # TODO: add generate script for node2nix like e.g.: https://github.com/NixOS/nixpkgs/blob/f8d3c2dabdab26f53fe95079d7725da777019ff2/pkgs/development/web/netlify-cli/generate.sh
 let
+  nodejs = pkgs.nodejs_18;
   nodePackages = import ./node2nix {
-    inherit pkgs system;
-    nodejs = pkgs.nodejs_18;
+    inherit pkgs system nodejs;
   };
   nodeDependencies = nodePackages.nodeDependencies;
 in
@@ -19,7 +19,7 @@ stdenv.mkDerivation
     hash = "sha256-HiuRzcEI+6oP9oaOTxgUK41a1ajZBvAnE/bVCnzIDk0=";
   };
 
-  buildInputs = with pkgs; [ nodejs_18 yarn ];
+  buildInputs = with pkgs; [ nodejs yarn makeWrapper ];
 
   buildPhase = ''
     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
@@ -28,6 +28,9 @@ stdenv.mkDerivation
     ${pkgs.nodePackages_latest.typescript}/bin/tsc
     cp -r dist $out/
     cp -r ${nodeDependencies}/lib/node_modules $out/node_modules
+
+    # create binary using wrapper script
+    makeWrapper ${pkgs.nodejs}/bin/node $out/bin/dcli --add-flags "$out/index.js" --inherit-argv0
   '';
 
   meta = with lib; {
