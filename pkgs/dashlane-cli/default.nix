@@ -8,36 +8,41 @@ let
   };
   nodeDependencies = nodePackages.nodeDependencies;
 in
-nodeDependencies
+stdenv.mkDerivation
+{
+  pname = "dashlane-cli";
+  version = "1.13.0";
+  src = fetchFromGitHub {
+    owner = "Dashlane";
+    repo = "dashlane-cli";
+    rev = "28fd4ec19c79738aa75acb8672cdd1691f8a7465";
+    hash = "sha256-HiuRzcEI+6oP9oaOTxgUK41a1ajZBvAnE/bVCnzIDk0=";
+  };
 
-# stdenv.mkDerivation {
-#   pname = "dashlane-cli";
-#   version = "1.13.0";
-#   src = ./.;
+  buildInputs = with pkgs; [ nodejs_18 yarn ];
 
-#   buildInputs = with pkgs; [ nodejs_18 yarn ];
+  buildPhase = ''
+    ln -s ${nodeDependencies}/lib/node_modules ./node_modules
+    export PATH="${nodeDependencies}/bin:$PATH"
+    
+    ${pkgs.nodePackages_latest.typescript}/bin/tsc
+    #yarn run build
+    #cp -r dist $out/
+  '';
 
-#   buildPhase = ''
-#     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-#     export PATH="${nodeDependencies}/bin:$PATH"
+  meta = with lib; {
+    homepage = "https://github.com/Dashlane/dashlane-cli";
+    description = "A Dashlane CLI";
 
-#     #yarn run --offline build
-#     #cp -r dist $out/
-#   '';
+    # for SSO, see: https://github.com/Dashlane/dashlane-cli/blob/28fd4ec19c79738aa75acb8672cdd1691f8a7465/src/modules/auth/sso/index.ts#L4
+    longDescription = ''
+      Dashlane CLI is a command line interface for Dashlane. 
+      It allows you to interact with your Dashlane account, and to manage your passwords and personal data.
 
-#   meta = with lib; {
-#     homepage = "https://github.com/Dashlane/dashlane-cli";
-#     description = "A Dashlane CLI";
-
-#     # for SSO, see: https://github.com/Dashlane/dashlane-cli/blob/28fd4ec19c79738aa75acb8672cdd1691f8a7465/src/modules/auth/sso/index.ts#L4
-#     longDescription = ''
-#       Dashlane CLI is a command line interface for Dashlane. 
-#       It allows you to interact with your Dashlane account, and to manage your passwords and personal data.
-
-#       Note: To use the Dashlane SSO feature, you must install the chromium browser and set PLAYWRIGHT_BROWSERS_PATH properly. 
-#     '';
-#     license = licenses.asl20;
-#     platforms = [ "x86_64-linux" ];
-#     mainProgram = "dcli";
-#   };
-# }
+      Note: To use the Dashlane SSO feature, you must install the chromium browser and set PLAYWRIGHT_BROWSERS_PATH properly. 
+    '';
+    license = licenses.asl20;
+    platforms = [ "x86_64-linux" ];
+    mainProgram = "dcli";
+  };
+}
