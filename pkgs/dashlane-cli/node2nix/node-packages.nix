@@ -1914,6 +1914,7 @@ let
       rev = "28fd4ec19c79738aa75acb8672cdd1691f8a7465";
       hash = "sha256-HiuRzcEI+6oP9oaOTxgUK41a1ajZBvAnE/bVCnzIDk0=";
     };
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
     dependencies = [
       sources."@colors/colors-1.5.0"
       sources."@dabh/diagnostics-2.0.3"
