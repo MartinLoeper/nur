@@ -25,7 +25,7 @@ stdenv.mkDerivation
     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
     export PATH="${nodeDependencies}/bin:$PATH"
     
-    ${pkgs.nodePackages_latest.typescript}/bin/tsc
+    tsc
     cp -r dist $out/
     cp -r ${nodeDependencies}/lib/node_modules $out/node_modules
 
