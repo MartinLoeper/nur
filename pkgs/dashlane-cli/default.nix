@@ -26,8 +26,8 @@ stdenv.mkDerivation
     export PATH="${nodeDependencies}/bin:$PATH"
     
     ${pkgs.nodePackages_latest.typescript}/bin/tsc
-    #yarn run build
-    #cp -r dist $out/
+    cp -r dist $out/
+    cp -r ${nodeDependencies}/lib/node_modules $out/node_modules
   '';
 
   meta = with lib; {
