@@ -5376,12 +5376,15 @@ in
   nodeDependencies = nodeEnv.buildNodeDependencies (lib.overrideExisting args {
     src = stdenv.mkDerivation {
       name = args.name + "-package-json";
-      src = nix-gitignore.gitignoreSourcePure [
-        "*"
-        "!package.json"
-        "!package-lock.json"
-      ]
-        args.src;
+      # workaround: do not filter gitignore since pipeline for nur fails for some reason I dont undserstand
+      # see also: https://github.com/NixOS/nix/issues/5509
+      #src = nix-gitignore.gitignoreSourcePure [
+      #  "*"
+      #  "!package.json"
+      #  "!package-lock.json"
+      #]
+      #  args.src;
+      src = args.src;
       dontBuild = true;
       installPhase = "mkdir -p $out; cp -r ./* $out;";
     };
