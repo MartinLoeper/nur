@@ -61,8 +61,8 @@ let
     for dir in "''${!outputInclude}"/include/*; do
       cp -r "$dir"/* "''${!outputInclude}/include/"
       rm -r "$dir"
-      ln -s . "$dir"
-    done
+      ln -s . "$dir" 
+    donez
     ln -sr -t "''${!outputInclude}/include/" "''${!outputInclude}"/lib/*/include/* 2>/dev/null || true
   '';
 
