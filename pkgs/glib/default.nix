@@ -62,7 +62,7 @@ let
       cp -r "$dir"/* "''${!outputInclude}/include/"
       rm -r "$dir"
       ln -s . "$dir" 
-    donez
+    done
     ln -sr -t "''${!outputInclude}/include/" "''${!outputInclude}"/lib/*/include/* 2>/dev/null || true
   '';
 
