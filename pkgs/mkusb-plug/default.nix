@@ -1,10 +1,12 @@
 { lib, stdenv, pkgs, fetchFromGitHub, ... }:
 
 let
-  src = fetchTarball
+  src = fetchFromGitHub
     {
-      url = "https://phillw.net/isos/linux-tools/mkusb/mkusb-plug-plus-tools.tar.gz";
-      sha256 = "sha256:0jbrsy9kxzm5zbl5dspi3js1dldjnf6ayl5z7fi26mysxfrcyp95";
+      owner = "sudodus";
+      repo = "tarballs";
+      rev = "93b43c208e902d0f8064b3b0abf461765b273a53";
+      sha256 = "sha256-FcI/GKLjhIN0YxXNxE6bagGyQ7o9SwtHfIonrXc4EkE=";
     };
   xorriso = stdenv.mkDerivation (finalAttrs: {
     pname = "xorriso";
@@ -63,7 +65,8 @@ let
     unpackPhase = ":";
     installPhase = ''
       install -d $out/bin
-      cp $src/mkusb-sedd $out/bin/.mkusb-sedd-wrapped
+      tar -xvzf $src/mkusb-plug-plus-tools.tar.gz
+      cp plug-dir/mkusb-sedd $out/bin/.mkusb-sedd-wrapped
       runHook postInstall
     '';
     postInstall = ''
@@ -93,7 +96,8 @@ let
       unpackPhase = ":";
       installPhase = ''
         install -d $out/bin
-        cp $src/mkusb-plug $out/bin/.mkusb-plug-wrapped
+        tar -xvzf $src/mkusb-plug-plus-tools.tar.gz
+        cp plug-dir/mkusb-plug $out/bin/.mkusb-plug-wrapped
 
         runHook postInstall
       '';
