@@ -3,7 +3,7 @@
 let
   src = fetchTarball
     {
-      url = "https://github.com/sudodus/tarballs/raw/master/mkusb-plug-plus-tools.tar.gz";
+      url = "https://phillw.net/isos/linux-tools/mkusb/mkusb-plug-plus-tools.tar.gz";
       sha256 = "sha256:0jbrsy9kxzm5zbl5dspi3js1dldjnf6ayl5z7fi26mysxfrcyp95";
     };
   xorriso = stdenv.mkDerivation (finalAttrs: {
