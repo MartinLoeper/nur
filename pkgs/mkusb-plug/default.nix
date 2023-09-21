@@ -1,4 +1,4 @@
-{ lib, stdenv, pkgs, fetchFromGitHub, ... }:
+{ lib, stdenv, pkgs, fetchFromGitHub, callPackage, ... }:
 
 let
   src = fetchFromGitHub
@@ -31,7 +31,7 @@ let
         --inherit-argv0 \
         --prefix PATH : ${lib.makeBinPath [ 
           pkgs.pv
-          ./../xorriso
+          (callPackage ./../xorriso {})
           pkgs.exfatprogs
           pkgs.expect
           pkgs.util-linux
@@ -66,7 +66,7 @@ let
           --inherit-argv0 \
           --prefix PATH : ${lib.makeBinPath [ 
             pkgs.pv
-            ./../xorriso
+            (callPackage ./../xorriso {})
             mkusb-sedd
             pkgs.exfatprogs
             pkgs.expect
