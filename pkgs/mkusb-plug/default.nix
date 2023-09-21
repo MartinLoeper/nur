@@ -66,7 +66,7 @@ let
           --inherit-argv0 \
           --prefix PATH : ${lib.makeBinPath [ 
             pkgs.pv
-            xorriso
+            ./../xorriso
             mkusb-sedd
             pkgs.exfatprogs
             pkgs.expect
