@@ -38,7 +38,8 @@ let
 in
 pkgs.symlinkJoin
 {
-  name = pname-base;
+  pname = pname-base;
+  inherit version;
   paths = [ appImageWrapper xdgDirectory ];
 
   meta = with lib; {
