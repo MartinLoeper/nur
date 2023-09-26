@@ -3,8 +3,8 @@ pkgs.xorriso.overrideAttrs (old: {
   version = "${old.version}-patched";
 
   src = fetchurl {
-    url = "mirror://gnu/xorriso/xorriso-${old.version}.tar.gz";
-    sha256 = "sha256-eG+fXfmGXMWwwf7O49LA9eBMq4yahZvRycfM1JZP2uE=";
+    url = "https://www.gnu.org/software/xorriso/xorriso-${old.version}.tar.gz";
+    sha256 = "sha256-hnV3w4f2tKmjIk60Qd7Y+xY432y8Bg+NGh5dAPMY9QI=";
   };
 
   preInstall = ''
