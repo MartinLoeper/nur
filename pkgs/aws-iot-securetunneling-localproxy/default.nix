@@ -46,7 +46,7 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    cmake ../src
+    cmake ..
     make
   '';
 
