@@ -30,7 +30,7 @@ stdenv.mkDerivation {
     (boost181.override
       { enableShared = false; enableStatic = true; })
     openssl
-    protobuf3_19
+    protobuf3
     zlib
     catch2
     cmake
