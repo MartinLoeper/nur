@@ -1,4 +1,4 @@
-{ lib, stdenv, pkgs, fetchFromGitHub, fetchurl, ... }:
+{ lib, stdenv, pkgs, fetchFromGitHub, fetchurl, protobuf3_19, ... }:
 
 stdenv.mkDerivation {
   pname = "aws-iot-securetunneling-localproxy";
@@ -30,7 +30,7 @@ stdenv.mkDerivation {
     (boost181.override
       { enableShared = false; enableStatic = true; })
     openssl
-    protobuf
+    protobuf3_19
     zlib
     catch2
     cmake
