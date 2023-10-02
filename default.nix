@@ -24,4 +24,5 @@ rec {
   xorriso = pkgs.callPackage ./pkgs/xorriso { };
   aws-iot-securetunneling-localproxy = pkgs.callPackage ./pkgs/aws-iot-securetunneling-localproxy { };
   elster-authenticator = pkgs.callPackage ./pkgs/elster-authenticator { };
+  lightdm-webkit2-greeter = pkgs.callPackage ./pkgs/lightdm-webkit2-greeter { lightdm-webkit2-greeter = lightdm-webkit2-greeter; };
 }
