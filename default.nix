@@ -6,7 +6,18 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { }, poetry2nix, ... }:
+let
+  poetry2nixRepo = builtins.fetchGit
+    {
+      url = "https://github.com/nesto-software/poetry2nix.git";
+      rev = "2b181263bef42af0493e9073967fde29ea938b95";
+      ref = "new-bootstrap-fixes";
+    };
+in
+{ pkgs ? import <nixpkgs> { }
+, poetry2nix ? (import "${poetry2nixRepo}/compat.nix").default
+, ...
+}:
 
 rec {
   modules = import ./modules;

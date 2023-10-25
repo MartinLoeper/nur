@@ -1,4 +1,4 @@
-{ lib, stdenv, pkgs, fetchFromGitHub, poetry2nix, ... }:
+{ lib, pkgs, fetchFromGitHub, poetry2nix, ... }:
 
 poetry2nix.mkPoetryApplication rec {
   pname = "aws-sso-credential-process";
@@ -11,7 +11,6 @@ poetry2nix.mkPoetryApplication rec {
   };
   format = "pyproject";
   poetrylock = ./poetry.lock;
-  src = poetry2nix.cleanPythonSources { src = projectDir; };
   python = pkgs.python39;
 
   meta = with lib; {
