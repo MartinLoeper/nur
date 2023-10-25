@@ -1,6 +1,10 @@
 {
   description = "Personal NUR repository by mloeper";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+  # TODO: remove the workaround for https://github.com/nix-community/poetry2nix/pull/1329
+  # we also use a fork for aws-sso-credential-process to adapt to pyproject.toml syntax changes
+  # we also pin the python version to 3.9 for aws-sso-credential-process
   inputs.poetry2nix = {
     url = "github:nesto-software/poetry2nix?ref=new-bootstrap-fixes";
     inputs.nixpkgs.follows = "nixpkgs";
