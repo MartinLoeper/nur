@@ -23,4 +23,5 @@ rec {
   mkusb-sedd = pkgs.callPackage ./pkgs/mkusb-sedd { };
   xorriso = pkgs.callPackage ./pkgs/xorriso { };
   aws-iot-securetunneling-localproxy = pkgs.callPackage ./pkgs/aws-iot-securetunneling-localproxy { };
+  dynobase = pkgs.callPackage ./pkgs/dynobase { };
 }
