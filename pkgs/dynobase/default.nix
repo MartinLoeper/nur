@@ -8,8 +8,8 @@ let
     pname = "${pname-base}-wrapped";
 
     src = fetchurl {
-      url = "dynobase-${version}-build-230416d1lkzhd17.AppImage";
-      hash = "sha256-VVVHcWnoZxlgzL13EnCKcymyas4CqfdLptcI8raT4PA=";
+      url = "https://github.com/Dynobase/dynobase/releases/download/v2.3.0/dynobase-${version}-build-230416d1lkzhd17.AppImage";
+      hash = "sha256-rQTbWEAyweNZ/vzr++sfECAUb6aCBEKhX3Q6y3vt78g=";
     };
   };
   desktopFile = pkgs.substituteAll {
@@ -34,7 +34,7 @@ let
 in
 pkgs.symlinkJoin
 {
-  pname = pname-base;
+  name = "${pname-base}-${version}";
   inherit version;
   paths = [ appImageWrapper xdgDirectory ];
 
