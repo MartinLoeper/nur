@@ -44,8 +44,8 @@ jobs:
       run: |
         nix-env -f . -qa \* --meta --xml \
           --allowed-uris https://static.rust-lang.org \
-          --allowed-uris https://github.com/nesto-software/poetry2nix/archive/2b181263bef42af0493e9073967fde29ea938b95.tar.gz \
-          --allowed-uris https://api.flakehub.com/f/pinned/edolstra/flake-compat \
+          --allowed-uris https://github.com \
+          --allowed-uris https://api.flakehub.com \
           --option restrict-eval true \
           --option allow-import-from-derivation true \
           --drv-path --show-trace \
