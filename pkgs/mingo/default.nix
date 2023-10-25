@@ -38,7 +38,7 @@ let
 in
 pkgs.symlinkJoin
 {
-  pname = pname-base;
+  name = "${pname-base}-${version}";
   inherit version;
   paths = [ appImageWrapper xdgDirectory ];
 
