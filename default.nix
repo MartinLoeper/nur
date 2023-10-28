@@ -7,7 +7,6 @@
 #     nix-build -A mypackage
 
 { pkgs ? import <nixpkgs> { }
-, poetry2nix ? (import ((fetchTarball "https://github.com/nesto-software/poetry2nix/archive/2b181263bef42af0493e9073967fde29ea938b95.tar.gz") + "/compat.nix")).default
 , ...
 }:
 
@@ -26,7 +25,6 @@ rec {
   mkusb-sedd = pkgs.callPackage ./pkgs/mkusb-sedd { };
   xorriso = pkgs.callPackage ./pkgs/xorriso { };
   dynobase = pkgs.callPackage ./pkgs/dynobase { };
-  aws-sso-credential-process = pkgs.callPackage ./pkgs/aws-sso-credential-process { inherit poetry2nix; };
   aws-iot-securetunneling-localproxy = pkgs.callPackage ./pkgs/aws-iot-securetunneling-localproxy { protobuf3_19 = protobuf3_19; };
   elster-authenticator = pkgs.callPackage ./pkgs/elster-authenticator { };
   lightdm-webkit2-greeter = pkgs.callPackage ./pkgs/lightdm-webkit2-greeter { lightdm-webkit2-greeter = lightdm-webkit2-greeter; };
