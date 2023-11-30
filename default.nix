@@ -31,5 +31,5 @@ rec {
   protobuf3_19 = pkgs.callPackage ./pkgs/protobuf3_19/default.nix {
     abseil-cpp = pkgs.abseil-cpp_202103;
   };
-  firefox-addons = import ./pkgs/firefox-addons { inherit pkgs; fetchurl = pkgs.fetchurl; lib = pkgs.lib; stdenv = pkgs.stdenv; };
+  firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
 }
