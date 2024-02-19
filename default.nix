@@ -32,4 +32,7 @@ rec {
     abseil-cpp = pkgs.abseil-cpp_202103;
   };
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
+  mongosh = pkgs.callPackage ./pkgs/mongosh { };
+  atlas-cli = pkgs.callPackage ./pkgs/atlas-cli { };
+  nosql-workbench = pkgs.callPackage ./pkgs/nosql-workbench { };
 }
