@@ -47,6 +47,6 @@ pkgs.symlinkJoin
     description = "The best MongoDB GUI Admin. Intuitive • Fast • Secure";
     license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
-    mainProgram = "Mingo";
+    mainProgram = "mingo";
   };
 }
