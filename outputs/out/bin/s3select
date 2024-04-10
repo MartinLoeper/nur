@@ -1,2 +1,0 @@
-#! /nix/store/5lr5n3qa4day8l1ivbwlcby2nknczqkq-bash-5.2p26/bin/bash -e
-exec -a "$0" "/nix/store/rlv9fcq70pniyrm3xy21wgk5rdhdh12h-nodejs-20.11.1/bin/node"  /home/mloeper/nesto/repos/nesto-software/s3-browser-cli/outputs/out/index.js "$@" 
