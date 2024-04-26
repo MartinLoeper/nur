@@ -21,13 +21,26 @@ stdenv.mkDerivation
     owner = "pnp";
     repo = "cli-microsoft365";
     rev = "v7.6.0";
-    #hash = "";
+    hash = "sha256-0grJccby3FIL6iIZ4gXEgX5hVsdnGNMr2EwRuJXyq+4=";
   };
 
   buildInputs = with pkgs; [ nodejs makeWrapper ];
 
   buildPhase = ''
+    ln -s ${nodeDependencies}/lib/node_modules ./node_modules
+    export PATH="${nodeDependencies}/bin:$PATH"
+    npm run build
+  '';
 
+  installPhase = ''
+    export PATH="${nodeDependencies}/bin:$PATH"
+    mkdir -p $out/bin
+   
+    cp -r dist package.json allCommands.json $out/
+    ln -s ${nodeDependencies}/lib/node_modules $out/node_modules
+
+    # create cli binary
+    makeWrapper ${pkgs.nodejs}/bin/node $out/bin/m365 --add-flags "$out/dist/index.js" --inherit-argv0 --set PATH ${lib.makeBinPath [ nodejs ]}
   '';
 
   meta = with lib; {
