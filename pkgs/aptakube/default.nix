@@ -1,15 +1,15 @@
 { lib, stdenv, pkgs, fetchurl, appimageTools, ... }:
 
 let
-  pname-base = "mingo";
-  version = "1.13.5";
+  pname-base = "aptakube";
+  version = "1.6.10";
   appImage = appimageTools.wrapType2 {
     inherit version;
     pname = "${pname-base}-wrapped";
 
     src = fetchurl {
-      url = "https://github.com/mingo-app/mingo/releases/download/v${version}/Mingo-${version}.AppImage";
-      hash = "sha256-mrFcKX7nGv4sdI3ruWk6pV9qdwZMIgbCGXHiSgFwjh8=";
+      url = "https://releases.aptakube.com/aptakube_${version}_amd64.AppImage";
+      hash = "sha256-UNtNJI0/2WkZbI89j9wt13AzssKB5DhINtzT5r94TQw=";
     };
 
     extraPkgs = pkgs: with pkgs; [
@@ -18,9 +18,9 @@ let
   };
   desktopFile = pkgs.substituteAll {
     inherit version;
-    src = ./share/applications/mingo.desktop;
+    src = ./share/applications/aptakube.desktop;
     exec = "${appImage}/bin/${appImage.pname}";
-    icon = ./share/icons/icon.png;
+    icon = ./share/icons/aptakube.png;
   };
   xdgDirectory = stdenv.mkDerivation {
     inherit version;
@@ -34,19 +34,19 @@ let
     '';
     unpackPhase = ":";
   };
-  appImageWrapper = (pkgs.writeShellScriptBin "mingo" "exec -a $0 ${appImage}/bin/${appImage.pname} $@"); # renames the mingo-xxxx executable to "mingo"
+  appImageWrapper = (pkgs.writeShellScriptBin "aptakube" "exec -a $0 ${appImage}/bin/${appImage.pname} $@");
 in
 pkgs.symlinkJoin
 {
   name = "${pname-base}-${version}";
   inherit version;
-  paths = [ appImageWrapper xdgDirectory ];
+  paths = [ appImageWrapper ];
 
   meta = with lib; {
-    homepage = "https://mingo.io/";
-    description = "The best MongoDB GUI Admin. Intuitive • Fast • Secure";
+    homepage = "https://aptakube.com";
+    description = "Modern. Lightweight. Multi-Cluster. Kubernetes GUI";
     license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
-    mainProgram = "mingo";
+    mainProgram = "aptakube";
   };
 }

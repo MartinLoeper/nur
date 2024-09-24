@@ -1,8 +1,8 @@
 {
   description = "Personal NUR repository by mloeper";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs?rev=c7b821ba2e1e635ba5a76d299af62821cbcb09f3";
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, ... }:
     let
       systems = [
         "x86_64-linux"

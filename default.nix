@@ -10,6 +10,14 @@
 , ...
 }:
 
+let
+  mloeper = {
+    name = "Martin Löper";
+    email = "martin.loeper@nesto-software.de";
+    github = "MartinLoeper";
+    githubId = 5209395;
+  };
+in
 rec {
   modules = import ./modules;
 
@@ -36,4 +44,27 @@ rec {
   atlas-cli = pkgs.callPackage ./pkgs/atlas-cli { };
   nosql-workbench = pkgs.callPackage ./pkgs/nosql-workbench { };
   wifiman-desktop = pkgs.callPackage ./pkgs/wifiman-desktop { };
+  s3-browser-cli = pkgs.callPackage ./pkgs/s3-browser-cli/pkgs { };
+  openvpn3 = pkgs.callPackage ./pkgs/openvpn3 { };
+  openvpn3-indicator = pkgs.callPackage ./pkgs/openvpn3-indicator {
+    openvpn3 = openvpn3; # we use our custom openvpn3 package which is a bump v20 -> v21
+  };
+  nodejs_20_11_1 = pkgs.callPackage ./pkgs/nodejs { };
+  cli-microsoft365 = pkgs.callPackage ./pkgs/cli-microsoft365 { };
+  m365 = cli-microsoft365; # alias for cli-microsoft365
+  postman-cli = pkgs.callPackage ./pkgs/postman-cli {
+    inherit mloeper;
+  };
+  #rancher-desktop = pkgs.callPackage ./pkgs/rancher-desktop { };
+  jetbrains = {
+    gateway = (pkgs.callPackages ./pkgs/jetbrains {
+      vmopts = null;
+      jdk = pkgs.jetbrains.jdk;
+    }).gateway;
+    pycharm-professional = (pkgs.callPackages ./pkgs/jetbrains {
+      vmopts = null;
+      jdk = pkgs.jetbrains.jdk;
+    }).pycharm-professional;
+  };
+  aptakube = pkgs.callPackage ./pkgs/aptakube { };
 }
