@@ -40,7 +40,6 @@ rec {
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
   mongosh = pkgs.callPackage ./pkgs/mongosh { };
   atlas-cli = pkgs.callPackage ./pkgs/atlas-cli { };
-  wifiman-desktop = pkgs.callPackage ./pkgs/wifiman-desktop { };
   s3-browser-cli = pkgs.callPackage ./pkgs/s3-browser-cli/pkgs { };
   openvpn3 = pkgs.callPackage ./pkgs/openvpn3 { };
   openvpn3-indicator = pkgs.callPackage ./pkgs/openvpn3-indicator { };
